@@ -5,7 +5,7 @@ from zipfile import ZipFile
 import cloudscraper
 import sys
 
-if(len(sys.argv) != 2):
+if(len(sys.argv or (not "path=" in sys.argv[1] and not "projectID=" in sys.argv[1])) != 2):
     print("Wrong arguments!\nUsage: python downloader.py [path=path/modpack/manifest.json | projectID=project id]")
     exit()
 
@@ -34,7 +34,7 @@ if("projectID=" in MANIFEST_PATH):
     
     MANIFEST_PATH = PROJECTDATA["slug"] + "/manifest.json"
 else:
-    MANIFEST_PATH = str.replace(MANIFEST_PATH, 'path=', '') + "/manifest.json"
+    MANIFEST_PATH = str.replace(MANIFEST_PATH, 'path=', '')
 
 CWD = str.replace(MANIFEST_PATH, 'manifest.json', '')
 
